@@ -1,4 +1,4 @@
-# Global Crisis Detection and Monitor 
+# Global Crisis Monitor 
 
 
 [![](https://img.shields.io/badge/authors-%40Robert%20ODowd-blue)]
@@ -40,7 +40,7 @@ In essence, this project involved implementing the following components:
 ## Components Description
 
 ### [Random_Forest_Classifier:](https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/Random_Forest_Classifier.py) 
-   The module involves reading the tweets from the afore mentioned csv file into a pandas dataframe. It uses the "Tweet text" column as the data (X), leverages the "Informativness" column and creates a column "Crisis_ind" to be used as the labels (Y). It then does tokenization (vectorize), normalization and feature extraction using the Natural language processing algorithms like "Bag of Words" & "TFIDF". As part of the process, the stopwords were removed using the nltk libaray. The module extracts the 5000 most frequently used "pair of words"  (enabled by ngam fature) across the tweets and creates a matrix of those features to be then used for text classification. It then splits the data into a training and test dataset with a ratio of 70:30. 
+   The module involves reading the tweets from the afore mentioned csv file into a pandas dataframe. It uses the "Tweet text" column as the data (X), leverages the "Informativness" column and creates a column "Crisis_ind" to be used as the labels (Y). It then does tokenization (vectorize), normalization and feature extraction using the Natural language processing algorithms like "Bag of Words" & "TFIDF". As part of the process, the stopwords were removed using the nltk libaray. The module extracts the 5000 most frequently used "pair of words"  (enabled by ngram fature) across the tweets and creates a matrix of those features to be then used for text classification. It then splits the data into a training and test dataset with a ratio of 70:30. 
 
 The training dataset is then used for fitting the random forest classifier models and it uses aout 500 tress in the process. Once the model is built, we then use the testing dataset to evaluate the performance of the model using confusion matrix and arrive at the accuracy score. The trained model  ('random_classf') and the vectorizer was then pickled using using the pickle library.
 
@@ -96,10 +96,20 @@ The twitter ingestion Module leverages tweepy library to listen to the twitter l
  ## Storing processed Tweets in Azure:
       1. After the tweets are processed, classified, lematized they are stored in an Azure database for downstream processing. 
 
-The processed tweets are stored in Azure database on a real time basis. The Tableau Online visualization extracts the relevant information from the Azure SQL server and displays the crisis gradient information on a choropleth Map providing real time information on ongoing crisis and developing crisis for relevant stakeholders.  
+The processed tweets are stored in Azure database on a real time basis. The Tableau Online visualization extracts the relevant information from the Azure SQL server and displays the crisis gradient information on a choropleth Map providing real time information on ongoing crisis and developing crisis for relevant stakeholders. 
+
+## Visualization Dashboard: 
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/Visualization%20Dashboard.PNG">
+    </td>
+  </tr>
+</table>
 
 ## INSTALLATION & EXECUTION 
-   ### CREATING THE APP IN TWITTER API & GET SUBSCRIPTION 
+   ### CREATING THE APP IN TWITTER & GET TWITTER API SUBSCRIPTION 
     1. Ensure that the App is created in Twitter developer url 
     2. Create a subscription for twitter API and updated the credentials in the config.ini file. 
    ### RUNNING THE CLASSIFICATION MODELS  
@@ -124,3 +134,4 @@ The processed tweets are stored in Azure database on a real time basis. The Tabl
     1. Create a new Tableau Online User ID. 
     2. Ensure that the set up for the visualization is complete
     3. Point the newly created visualization in the Tableau server to the Azure SQL DB and test it. 
+
