@@ -5,9 +5,11 @@
 [![](https://img.shields.io/badge/authors-%40Savannah%20Edwards-blue)]
 [![](https://img.shields.io/badge/authors-%40Sam%20Raj-blue)](https://www.linkedin.com/in/samraj-anand-jeyachandran-pmp-7b273a6/)
 
-[![](https://img.shields.io/badge/authors-%40Nawida-blue)](https://www.linkedin.com/in/nawida-hussaini-23125397)
-[![](https://img.shields.io/badge/authors-%40Aron%20Tharp-blue)]
 [![](https://img.shields.io/badge/authors-%40Swapna-blue)]
+[![](https://img.shields.io/badge/authors-%40Aron%20Tharp-blue)]
+[![](https://img.shields.io/badge/authors-%40Nawida-blue)](https://www.linkedin.com/in/nawida-hussaini-23125397)
+
+
 
 
 ## Background
@@ -30,37 +32,37 @@ This project involves harnessing tweets which are spatially and geographically l
 </table>
 
 
-### Training Data 
+### Training & Testing Data 
 In order to train and test the Various classification Models, the data was downloaded into a csv file (crises_team134_training_data.csv) from the following link 
 
 https://crisislex.org/data-collections.html
 
 In essence, this project involved implementing the following components:
 
-## Components Description
+## 1. Components Description
 
-### [Random_Forest_Classifier:](https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/Random_Forest_Classifier.py) 
-   The module involves reading the tweets from the afore mentioned csv file into a pandas dataframe. It uses the "Tweet text" column as the data (X), leverages the "Informativness" column and creates a column "Crisis_ind" to be used as the labels (Y). It then does tokenization (vectorize), normalization and feature extraction using the Natural language processing algorithms like "Bag of Words" & "TFIDF". As part of the process, the stopwords were removed using the nltk libaray. The module extracts the 5000 most frequently used "pair of words"  (enabled by ngram fature) across the tweets and creates a matrix of those features to be then used for text classification. It then splits the data into a training and test dataset with a ratio of 70:30. 
+### [A. Random_Forest_Classifier:](https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/Random_Forest_Classifier.py) 
+   The module involves reading the tweets from the afore mentioned csv file into a pandas dataframe. It uses the "Tweet text" column as the data (X), leverages the "Informativness" column and creates a column "Crisis_ind" to be used as the labels (Y). It then does tokenization (vectorize), normalization and feature extraction using the Natural language processing algorithms like "Bag of Words" & "TFIDF". As part of the process, the stopwords were removed using the nltk libaray. The module extracts the 5000 most frequently used "pair of words"  (enabled by ngram feature) across the tweets and creates a matrix of those features to be then used for text classification. It then splits the data into a training and test dataset with a ratio of 70:30. 
 
 The training dataset is then used for fitting the random forest classifier models and it uses aout 500 tress in the process. Once the model is built, we then use the testing dataset to evaluate the performance of the model using confusion matrix and arrive at the accuracy score. The trained model  ('random_classf') and the vectorizer was then pickled using using the pickle library.
 
 Sklearn library was used extensively in this module for feature extraction, model selection and Randomeforest classification.  
    
-### [Naive_Bayes_Classifier:](https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/Naive_Bayes_Classifier.py) 
+### [B. Naive_Bayes_Classifier:](https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/Naive_Bayes_Classifier.py) 
   This module involves similar steps like loading the csv file, tokenization (vectorize), normalization and feature extraction using the Natural language processing algorithms like "Bag of Words" & "TFIDF", etc and creates a matrix of 5000 most commonly used "pairs of words" as features to be used for building the model and splitting the dataset into training and testing datasets.  
 
 The training dataset is then used for fitting the NaiveBayes MultionamialNB model for text classification. Once the model is built, we then use the testing dataset to evaluate the performance of the model using AUROC method as the Naive Bayes algorithm only assigns a confidence % for each tweet that was classified as crisis. The trained model ('naive_classf') and the vectorizer was then pickled using using the pickle library.
 
 Sklearn library was used extensively in this module as well for feature extraction, cross_validation, Naive Bayes classification and roc_auc metrics reporting.
 
-### [SVM Classifier:](https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/SVM_Classifier.py)
+### [C. SVM Classifier:](https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/SVM_Classifier.py)
 All of the steps Outlined above in the previous two models are performed here as well to extract the 5000 most commonly occuring pair of words as features to be used for training the model for text classification. 
 
 The training dataset is then used for fitting the SVM model. Once the model is built, we then use the testing dataset to evaluate the performance of the model using confusion matrix and arrive at the accuracy score. The trained model  ('svm_classf') and the vectorizer was then pickled using using the pickle library.
 
 Sklearn library was used extensively in this module as well for feature extraction, model selection, SVM classification.
 
-### [Real Time Twitter Ingestion Module:](https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/Twitter_Ingestion_Classification.py) 
+### [D. Real Time Twitter Ingestion Module:](https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/Twitter_Ingestion_Classification.py) 
 Now that the classification models have been created, we proceed to building the Tweet Ingestion module. 
 
 <table>
@@ -90,15 +92,15 @@ The twitter ingestion Module leverages tweepy library to listen to the twitter l
    #### Apply Ensemble Algorithm: 
       1. Perform an ensemble of all 3 model predictions and the mode function was applied to get the prediction arrived at by majotiy           of the models. This step is performed to improve the accuracy of the classification.   
       
-   #### Apply Lematization Algorithm: 
+   #### Apply Lemmatization Algorithm: 
       1. The model removes all URLs, @ references and Hashtags from the twitter message. 
       2. Leverages the NLP libary Spacy which loads the en_core_web_sm library for further processing. Using spacy the modules extracts          the situational context from the tweet focussing on entities (NORP, Faciltiy, Org, GPE, LOC, EVENT, DATE, TIME) and numbers.     
  ## Storing processed Tweets in Azure:
-      1. After the tweets are processed, classified, lematized they are stored in an Azure database for downstream processing. 
+      1. After the tweets are processed, classified, lemmatized they are stored in an Azure database for downstream processing. 
 
 The processed tweets are stored in Azure database on a real time basis. The Tableau Online visualization extracts the relevant information from the Azure SQL server and displays the crisis gradient information on a choropleth Map providing real time information on ongoing crisis and developing crisis for relevant stakeholders. 
 
-## Visualization Dashboard: 
+## E. Visualization Dashboard: 
 
 <table>
   <tr>
@@ -108,7 +110,7 @@ The processed tweets are stored in Azure database on a real time basis. The Tabl
   </tr>
 </table>
 
-## INSTALLATION & EXECUTION 
+## 2. INSTALLATION & EXECUTION 
    ### CREATING THE APP IN TWITTER & GET TWITTER API SUBSCRIPTION 
     1. Ensure that the App is created in Twitter developer url 
     2. Create a subscription for twitter API and updated the credentials in the config.ini file. 
