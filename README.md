@@ -37,7 +37,7 @@ https://crisislex.org/data-collections.html
 
 In essence, this project involved implementing the following components:
 
-## Components 
+## Components Description
 
 ### [Random_Forest_Classifier:](https://github.com/sgupta679/crisismonitor/blob/master/sam/Near_Final%20Code/Random_Forest_Classifier.py) 
    The module involves reading the tweets from the afore mentioned csv file into a pandas dataframe. It uses the "Tweet text" column as the data (X), leverages the "Informativness" column and creates a column "Crisis_ind" to be used as the labels (Y). It then does tokenization (vectorize), normalization and feature extraction using the Natural language processing algorithms like "Bag of Words" & "TFIDF". As part of the process, the stopwords were removed using the nltk libaray. The module extracts the 5000 most frequently used "pair of words"  (enabled by ngam fature) across the tweets and creates a matrix of those features to be then used for text classification. It then splits the data into a training and test dataset with a ratio of 70:30. 
@@ -98,3 +98,29 @@ The twitter ingestion Module leverages tweepy library to listen to the twitter l
 
 The processed tweets are stored in Azure database on a real time basis. The Tableau Online visualization extracts the relevant information from the Azure SQL server and displays the crisis gradient information on a choropleth Map providing real time information on ongoing crisis and developing crisis for relevant stakeholders.  
 
+## INSTALLATION & EXECUTION 
+   ### CREATING THE APP IN TWITTER API & GET SUBSCRIPTION 
+    1. Ensure that the App is created in Twitter developer url 
+    2. Create a subscription for twitter API and updated the credentials in the config.ini file. 
+   ### RUNNING THE CLASSIFICATION MODELS  
+    1. Ensure that the crises_team134_training_data.csv file is available in the folder. 
+    2. Ensure that the following python packages are available before proceeding to next step 
+       A. Pandas
+       B. Numpy 
+       C. nltk & download stopwords 
+       D. sklearn
+       E. pickle 
+     3. Run the classification programs in the following order and ensure that the path to csv file is referenced correctly. Also ensure        that the path to the pickle folder is referenced correctly. 
+      A. Random_Forest_Classifier.py  
+      B. Naive_Bayes_Classifier.py 
+      C. SVM_Classifier.py 
+   ### CREATING THE AZURE SQL SERVER DB 
+      1. Make sure that the Azure SQL server database is created and the connection strings provided are updated into the                       config.ini file.
+      2. Ensure that the firewalls are opened for the IP address of the server/ machine where the Python programs are going to be run. 
+   ### RUNNING THE TWITTER STREAMING MODULE 
+     1. Ensure that the references to the Config.ini files and the 3 pickled classification models are correct. 
+     2. Run the Twitter_Ingestion_Classification.py module. This module will harness the twitter information, perform the classification         and update the data into the Azure SQL DB. 
+   ### VISUALIZATION
+    1. Create a new Tableau Online User ID. 
+    2. Ensure that the set up for the visualization is complete
+    3. Point the newly created visualization in the Tableau server to the Azure SQL DB and test it. 
