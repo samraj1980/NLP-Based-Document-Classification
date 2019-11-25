@@ -26,7 +26,7 @@ This project involves harnessing tweets which are spatially and geographically l
 <table>
   <tr>
     <td>
-      <img src="https://www.lucidchart.com/documents/view/3a6018c3-2384-4ed6-a46b-2a09ae8325c2#">
+      <img src="https://github.com/samraj1980/CSE6242_Project/blob/master/Crisis%20Monitor%20Solution.jpg">
     </td>
   </tr>
 </table>
