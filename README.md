@@ -5,7 +5,7 @@
 [![](https://img.shields.io/badge/authors-%40Savannah%20Edwards-blue)]
 [![](https://img.shields.io/badge/authors-%40Sam%20Raj-blue)](https://www.linkedin.com/in/samraj-anand-jeyachandran-pmp-7b273a6/)
 
-[![](https://img.shields.io/badge/authors-%40Swapna-blue)]
+[![](https://img.shields.io/badge/authors-%40Swapna-blue)](https://www.linkedin.com/in/swapnagupta/)
 [![](https://img.shields.io/badge/authors-%40Aron%20Tharp-blue)]
 [![](https://img.shields.io/badge/authors-%40Nawida-blue)](https://www.linkedin.com/in/nawida-hussaini-23125397)
 
@@ -76,14 +76,14 @@ Now that the classification models have been created, we proceed to building the
 
 The twitter ingestion Module leverages tweepy library to listen to the twitter live streaming feed. A filter of 380 keywords related to crisis retreieved from https://crisislex.org/crisis-lexicon.html was used to filter the tweets during ingestion.  
 
- ## Pre-processing Steps:
+ ## (i). Pre-processing Steps:
       1. Extract tweets that are only in English language.  
       2. Ignore Re-tweets
       3. Extract data from Extended tweet tag and also include hash tages. 
       4. Extract the crisis related keywords that was found in the tweet. 
       5. Extract Place, Country and type from tweets if they are present
       
- ## Text Classification & Sentiment Analysis      
+ ## (ii). Text Classification & Sentiment Analysis      
    #### Vectorizing and Performing Real time classification: 
       1. Convert the Tweet words extracted into features using the vectorizer that was pickled. 
       2. Pass the extracted features and invoke the 3 trained models using the pickle library. The prediction from all the 3 models 
@@ -95,7 +95,7 @@ The twitter ingestion Module leverages tweepy library to listen to the twitter l
    #### Apply Lemmatization Algorithm: 
       1. The model removes all URLs, @ references and Hashtags from the twitter message. 
       2. Leverages the NLP libary Spacy which loads the en_core_web_sm library for further processing. Using spacy the modules extracts          the situational context from the tweet focussing on entities (NORP, Faciltiy, Org, GPE, LOC, EVENT, DATE, TIME) and numbers.     
- ## Storing processed Tweets in Azure:
+ ## (iii). Storing processed Tweets in Azure:
       1. After the tweets are processed, classified, lemmatized they are stored in an Azure database for downstream processing. 
 
 The processed tweets are stored in Azure database on a real time basis. The Tableau Online visualization extracts the relevant information from the Azure SQL server and displays the crisis gradient information on a choropleth Map providing real time information on ongoing crisis and developing crisis for relevant stakeholders. 
