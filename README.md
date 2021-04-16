@@ -1,14 +1,5 @@
-# Global Crisis Monitor 
-
-
-[![](https://img.shields.io/badge/authors-%40Robert%20ODowd-blue)]
-[![](https://img.shields.io/badge/authors-%40Savannah%20Edwards-blue)]
+# 
 [![](https://img.shields.io/badge/authors-%40Sam%20Raj-blue)](https://www.linkedin.com/in/samraj-anand-jeyachandran-pmp-7b273a6/)
-
-[![](https://img.shields.io/badge/authors-%40Swapna-blue)](https://www.linkedin.com/in/swapnagupta/)
-[![](https://img.shields.io/badge/authors-%40Aron%20Tharp-blue)]
-[![](https://img.shields.io/badge/authors-%40Nawida-blue)](https://www.linkedin.com/in/nawida-hussaini-23125397)
-
 
 
 
